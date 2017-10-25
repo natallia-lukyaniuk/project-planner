@@ -1,0 +1,22 @@
+{
+  "name": "project-planner",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "cross-env NODE_ENV=dev npm run webpack:dev",
+    "build": "cross-env NODE_ENV=prod npm run webpack:prod",
+    "webpack:dev": "webpack-dev-server --progress",
+    "webpack:prod": "webpack -p"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/natallia-lukyaniuk/project-planner.git"
+  },
+  "author": "Natallia Lukyaniuk",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/natallia-lukyaniuk/project-planner/issues"
+  },
+  "homepage": "https://github.com/natallia-lukyaniuk/project-planner#readme"
+}
