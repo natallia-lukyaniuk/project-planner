@@ -8,7 +8,6 @@ module.exports = {
         extensions: ['.js', '.ts']
     },
     entry: {
-        polyfills: "./src/polyfills.ts",
         main: "./src/main.ts"
     },
     output: {
@@ -32,16 +31,44 @@ module.exports = {
           },
           {
             test: /\.css$/,
-            use: ExtractTextPlugin.extract(
-              'to-string-loader', 'style-loader', 'css-loader'
-            ),
+            use: ['to-string-loader', 'css-loader']
           },
           {
             test: /\.scss$/,
+            exclude: [/node_modules/, /.global.scss$/],
+            use: ['to-string-loader', 'css-loader', 'sass-loader']
+          },
+          {
+            test: /global.scss$/,
+            exclude: /node_modules/,
+            use: ExtractTextPlugin.extract({
+              fallback: 'style-loader',
+              use: [
+                'css-loader',
+                'sass-loader',
+              ],
+            })
+          },
+          {
+            test: /\.(svg|png|jpg)$/,
             use: [
-              "raw-loader", "sass-loader?sourceMap"
+              {
+                loader: 'file-loader',
+                options: {
+                  name: 'assets/images/[name].[ext]',
+                },
+              },
             ],
-          }
+          },
+          {
+            test: /\.(ttf|eot|woff(2)?)(\?[a-z0-9]+)?$/,
+            use:
+            [
+              {
+                loader: 'url-loader',
+              },
+            ],
+          },
         ]
     },
     plugins: [
